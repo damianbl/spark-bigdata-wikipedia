@@ -39,6 +39,8 @@ object WikipediaRanking extends WikipediaRankingInterface {
     .setMaster(masterUrl)
     .setAppName(appName)
     .set("spark.cores.max", "4")
+    .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+    .registerKryoClasses(Array(classOf[WikipediaArticle]))
 
   val sc: SparkContext = SparkContext.getOrCreate(conf)
 
