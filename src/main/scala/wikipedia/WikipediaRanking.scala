@@ -46,8 +46,7 @@ object WikipediaRanking extends WikipediaRankingInterface {
 
   // Hint: use a combination of `sc.parallelize`, `WikipediaData.lines` and `WikipediaData.parse`
   val wikiRdd: RDD[WikipediaArticle] =
-    sc.parallelize(WikipediaData.lines.map(WikipediaData.parse))
-      .persist(StorageLevel.MEMORY_ONLY)
+    sc.parallelize(WikipediaData.lines.map(WikipediaData.parse)).cache()
 
   /** Returns the number of articles on which the language `lang` occurs.
     * Hint1: consider using method `aggregate` on RDD[T].
